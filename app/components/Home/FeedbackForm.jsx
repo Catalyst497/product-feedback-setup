@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useScreenSize from "../../hooks/useScreenSize";
-import { setFeedbacks } from "@/GlobalRedux/slices/AppSlice";
-// import {
-//   setFeedbackFormOpen,
-//   setFeedbacks,
-// } from "@/GlobalRedux/slices/AppSlice";
+import {
+  setFeedbackFormOpen,
+} from "@/GlobalRedux/slices/AppSlice";
 import useUpdateFeedbacks from "../../hooks/useUpdateFeedbacks";
 import axios from "axios";
 
@@ -34,8 +32,7 @@ function FeedbackForm() {
       const res = await axios.post("/api/feedback", feedback);
       console.log(res);
       if (res.data === "New Feedback successsfully saved.") {
-        const updatedFeedbacks = await getUpdatedFeedbacks()
-        dispatch(setFeedbacks(updatedFeedbacks));
+        getUpdatedFeedbacks()
         setFeedback({
           title: "",
           body: "",

@@ -5,7 +5,6 @@ import useScreenSize from "../hooks/useScreenSize";
 import useUpdateFeedbacks from "../hooks/useUpdateFeedbacks";
 import { BsThreeDots } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { setFeedbacks } from "@/GlobalRedux/slices/AppSlice";
 
 function Feedback({ title, main, author, id }) {
   const dispatch = useDispatch();
@@ -41,16 +40,12 @@ function Feedback({ title, main, author, id }) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(feedbackUpdate);
-  }, [feedbackUpdate]);
 
   const deleteFeedback = async () => {
-    const response = await axios.delete("/api/feedback", { data: { id } });
+    const response = await axios.delete(`/api/feedback/${id}`);
     console.log(response);
     if (response.data === "Feedback deleted successfully.") {
-      const updatedFeedbacks = await getUpdatedFeedbacks();
-      dispatch(setFeedbacks(updatedFeedbacks));
+      getUpdatedFeedbacks();
       setOpenFeedbackOptions(false);
     }
   };
@@ -59,13 +54,10 @@ function Feedback({ title, main, author, id }) {
     if (!feedbackUpdate.title) return alert("Title cannot be empty.");
     if (!feedbackUpdate.body) return alert("Please fill all fields.");
     console.log(id);
-    const response = await axios.put("/api/feedback", {
-      feedback: feedbackUpdate,
-    });
+    const response = await axios.put("/api/feedback", feedbackUpdate);
     console.log(response);
     if (response.data === "Feedback updated successfully.") {
-      const updatedFeedbacks = await getUpdatedFeedbacks();
-      dispatch(setFeedbacks(updatedFeedbacks));
+      getUpdatedFeedbacks();
       setOpenFeedbackOptions(false);
       setEditMode(false);
     }

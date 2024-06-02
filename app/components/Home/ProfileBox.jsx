@@ -10,8 +10,8 @@ function ProfileBox() {
     const {user} = useSelector(st => st.user)
     const {isMobile} = useScreenSize()
     const [logoutOptionOpen, setLogoutOptionOpen] = useState(false)
-    const [emailName, domain] = 'email@example.com'
-    // user?.email.split('@')
+    const [emailName, domain] = user?.email.split('@')
+    
     function logout () {
       setLogoutOptionOpen(false)
       localStorage.removeItem('token')
@@ -25,7 +25,7 @@ function ProfileBox() {
         </div>
         <div className='flex-1 justify-self-start px-4'>
             <div className='font-bold capitalize text-[1.5rem]'>{user.username ? user?.username : 'username'}</div>
-            {/* <div>{user.email ? `${emailName.substr(0, 2)}...@${domain}` : 'email'}</div> */}
+            <div>{user.email ? `${emailName.substr(0, 2)}...@${domain}` : 'email'}</div>
         </div>
         <div className='relative'>
           {logoutOptionOpen && <ul className='absolute bg-white rounded-lg top-full right-0 shadow-md'>

@@ -10,7 +10,6 @@ export default function useUpdateFeedbacks() {
     try {
       const res = await axios.get("/api/feedback");
       const updatedFeedbacks = res.data;
-      console.log(updatedFeedbacks);
       dispatch(setFeedbacks(updatedFeedbacks));
     } catch (err) {
       console.log(err);
