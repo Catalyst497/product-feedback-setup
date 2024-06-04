@@ -3,55 +3,53 @@ import { connect } from "@/app/dbConfig.js";
 import Feedback from "@/app/models/feedbackModel";
 import User from "@/app/models/userModel";
 
-export async function POST (req, res) {
+export async function POST(req, res) {
   await connect();
   const reqBody = await req.json();
-    const { title, body, author } = reqBody;
-    console.log(author)
-    const user = await User.findById(author.id);
-    const proposedNewFeedback = { ...reqBody, author: user };
-    const newFeedback = new Feedback(proposedNewFeedback);
-    newFeedback.save();
-    return new Response("New Feedback successsfully saved.", {status: 200})
+  const { title, body, author } = reqBody;
+  console.log(author);
+  const user = await User.findById(author.id);
+  const proposedNewFeedback = { ...reqBody, author: user };
+  const newFeedback = new Feedback(proposedNewFeedback);
+  newFeedback.save();
+  return new Response("New Feedback successsfully saved.", { status: 200 });
 }
 
-export async function GET (req, res) {
+export async function GET(req, res) {
   await connect();
   try {
     const feedbacks = await Feedback.find({}).populate(
       "author",
       "id email username"
     );
- return new Response (JSON.stringify(feedbacks), { status: 200})
+    return new Response(JSON.stringify(feedbacks), { status: 200 });
     // res.status(200).send(feedbacks);
   } catch (err) {
     console.log(err);
-return new Response (err, { status: 500})
+    return new Response(err, { status: 500 });
     // res.status(500).send(err);
   }
 }
 
-export async function PUT (req) {
+export async function PUT(req) {
   await connect();
   try {
     const reqBody = await req.json();
     const { id, title, body } = reqBody;
-    console.log(id, title, body)
+    console.log(id, title, body);
     const updatedFeedback = await Feedback.findByIdAndUpdate(
       id,
       { title, body },
       { new: true }
     );
     console.log(updatedFeedback);
-    return new Response("Feedback updated successfully.", { status: 200})
+    return new Response("Feedback updated successfully.", { status: 200 });
     // res.status(200).send("Feedback updated successfully.");
   } catch (err) {
     console.log(err);
-    return new Response(err, { status: 500})
+    return new Response(err, { status: 500 });
   }
 }
-
-
 
 // async function handler(req, res) {
 //   await connect();

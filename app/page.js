@@ -31,7 +31,7 @@ export default function Home() {
       }
     }
     checkAuth();
-  }, []);
+  }, [router, authFunc]);
   if (loading) return <Loader />;
   return (
     <div className="md:flex md:justify-center">

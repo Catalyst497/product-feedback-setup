@@ -11,9 +11,7 @@ export async function POST(req, res) {
     const { email, password } = reqBody;
 
     if (!email || !password)
-      return new Response(
-        JSON.stringify({ error: "Please fill all fields." })
-      );
+      return new Response(JSON.stringify({ error: "Please fill all fields." }));
     // return res.json({ error: "Please fill all fields." });
 
     // Check if it is a valid email
@@ -41,9 +39,7 @@ export async function POST(req, res) {
 
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      return new Response(
-        JSON.stringify({ error: "Invalid password" })
-      );
+      return new Response(JSON.stringify({ error: "Invalid password" }));
       // return res.json({ error: "Invalid password" });
     }
 

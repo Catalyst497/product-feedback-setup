@@ -13,9 +13,7 @@ export async function POST(req, res) {
     const { username, email, password } = reqBody;
 
     if (!username || !email || !password)
-      return new Response(
-        JSON.stringify({ error: "Please fill all fields." })
-      );
+      return new Response(JSON.stringify({ error: "Please fill all fields." }));
     if (!email.match(regex))
       return new Response(
         JSON.stringify({ error: "Please enter a valid email address." })
@@ -26,7 +24,9 @@ export async function POST(req, res) {
     const user = await User.findOne({ email });
     if (user) {
       return new Response(
-        JSON.stringify({ error: "You already have an account with us. Please login." })
+        JSON.stringify({
+          error: "You already have an account with us. Please login.",
+        })
       );
       // return res.json({
       //   error: "You already have an account with us. Please login.",
@@ -36,7 +36,9 @@ export async function POST(req, res) {
     const userNameTwin = await User.findOne({ username });
     if (userNameTwin) {
       return new Response(
-        JSON.stringify({error: "Sorry, this username is taken. Please try another." })
+        JSON.stringify({
+          error: "Sorry, this username is taken. Please try another.",
+        })
       );
       // return res.json({error: 'Sorry, this username is taken. Please try another.'})
     }

@@ -1,6 +1,6 @@
 import { connect } from "@/app/dbConfig.js";
 import Feedback from "@/app/models/feedbackModel";
-export async function DELETE(req, {params}) {
+export async function DELETE(req, { params }) {
   await connect();
   try {
     console.log(req.query, params);

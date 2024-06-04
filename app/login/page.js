@@ -12,9 +12,11 @@ import { TailSpin } from "react-loader-spinner";
 
 function Login() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [callLoading, setCallLoading] = useState(false);
   const authFunc = useAuthorize();
+
   useEffect(() => {
     async function checkAuth() {
       try {
@@ -29,9 +31,8 @@ function Login() {
       }
     }
     checkAuth();
-  }, []);
+  }, [authFunc, router]);
 
-  const router = useRouter();
   const [pageError, setPageError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [user, setUser] = useState({
