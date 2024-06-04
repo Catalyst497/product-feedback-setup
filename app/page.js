@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useScreenSize from "./hooks/useScreenSize";
-import useAuthorize from './hooks/useAuthorize';
-import Loader from './components/Loader';
+import useAuthorize from "./hooks/useAuthorize";
+import Loader from "./components/Loader";
 import SideMenu from "./components/SideMenu";
 import SideBar from "./components/Home/SideBar";
 import Main from "./components/Home/Main";
@@ -32,15 +32,17 @@ export default function Home() {
     }
     checkAuth();
   }, []);
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
   return (
     <div className="md:flex md:justify-center">
       {isMobile && <SideMenu />}
       {isMobile && <NavMobile />}
-      
-      <div className={`page flex gap-4  ${isDesktop && "w-[80%]"} ${
+
+      <div
+        className={`page flex gap-4  ${isDesktop && "w-[80%]"} ${
           isTablet && "w-[90%]"
-        } ${!isMobile && "mt-20 mb-20"}`}>
+        } ${!isMobile && "mt-20 mb-20"}`}
+      >
         {!isMobile ? (
           <>
             <SideBar />
