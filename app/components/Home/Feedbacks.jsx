@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 function Feedbacks() {
   const { feedbacks } = useSelector((st) => st.app);
-  useEffect(() => {console.log(feedbacks.slice().reverse())}, [feedbacks]);
 
   return (
     <>

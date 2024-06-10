@@ -1,3 +1,4 @@
+'use client'
 import React, {useRef, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProfileBox from "./Home/ProfileBox";
