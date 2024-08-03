@@ -10,9 +10,9 @@ function SideMenu() {
   const { sideBarOpen } = useSelector((st) => st.app);
   const sideMenu = useRef(null);
 
-  useEffect(() => {
-    sideMenu.current.classList.toggle("translate-x-[100%]");
-  }, [sideBarOpen]);
+  // useEffect(() => {
+  //   sideMenu.current.classList.toggle("");
+  // }, [sideBarOpen]);
   return (
     <>
       {sideBarOpen && (
@@ -20,15 +20,28 @@ function SideMenu() {
       )}
       <div
         ref={sideMenu}
-        className={`side-menu fixed z-[9999] top-0 bottom-0 right-0 bg-[#f7f8fd] p-8 translate-x-[100%] duration-300 `}
+        className={`side-menu fixed z-[9999] top-0 bottom-0 right-0 bg-[#f7f8fd] p-8 ${
+          sideBarOpen ? "" : "translate-x-[100%]"
+        } duration-300 `}
       >
-        <MdClose
+        {/* <MdClose
           className="absolute left-4 top-4"
           size={28}
           onClick={() => {
             console.log('Function is called.')
             dispatch(setSideBarOpen(false))}}
-        />
+        /> */}
+
+        <div
+          onClick={() => {
+            console.log("Function is called.");
+            dispatch(setSideBarOpen(false));
+          }}
+          className="absolute left-4 top-4"
+        >
+          <MdClose size={28} />
+        </div>
+
         <ProfileBox />
       </div>
     </>
